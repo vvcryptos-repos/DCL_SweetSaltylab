@@ -48,7 +48,7 @@ export function showPrompt3() {
     width: 450,
     height: 300,
     startHidden: false,
-  });
+  }); 
 
   prompt.show();
 }

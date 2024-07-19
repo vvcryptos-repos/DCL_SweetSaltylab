@@ -49,13 +49,12 @@ let action2Completed = false;
 let action3Completed = false;
 
 // Crear modelos GLB para las esferas con posiciones específicas
-const yellowSphere = createModel("models/choco.glb", Vector3.create(2, 1, 2)); // Esfera amarilla (a)
-const blueSphere = createModel("models/salt.glb", Vector3.create(4, 1, 2));   // Esfera azul (b)
-const redSphere = createModel("models/fries.glb", Vector3.create(6, 1, 2));    // Esfera roja (c)
-const greenSphere = createModel("models/icecream2.glb", Vector3.create(8, 1, 2));  // Esfera verde (d)
-const pinkSphere = createModel("models/jam.glb", Vector3.create(2, 1, 4)); // Esfera rosa (e)
-const purpleSphere = createModel("models/cheese.glb", Vector3.create(4, 1, 4)); // Esfera violeta (f)
-
+const yellowSphere = createModel("models/choco.glb", Vector3.create(53.5, 1, 53), Vector3.create(1.75, 1.75, 1.75)); // Esfera amarilla (a)
+const blueSphere = createModel("models/salt.glb", Vector3.create(6, 1, 17), Vector3.create(1.75, 1.75, 1.75));   // Esfera azul (b)
+const redSphere = createModel("models/fries.glb", Vector3.create(52.89, 1, 8.8), Vector3.create(1.75, 1.75, 1.75));    // Esfera roja (c)
+const greenSphere = createModel("models/icecream2.glb", Vector3.create(35.38, 1, 55.88), Vector3.create(1.75, 1.75, 1.75));  // Esfera verde (d)
+const pinkSphere = createModel("models/jam.glb", Vector3.create(4.6,0.2 , 52.06), Vector3.create(1.75, 1.75, 1.75)); // Esfera rosa (e)
+const purpleSphere = createModel("models/cheese.glb", Vector3.create(61.63, 5, 28.87), Vector3.create(1.75, 1.75, 1.75)); // Esfera violeta (f)
 // Lista de todas las esferas para fácil manejo
 const spheres = [yellowSphere, blueSphere, redSphere, greenSphere, pinkSphere, purpleSphere];
 
@@ -96,7 +95,7 @@ function onModelClicked(model: Entity, modelName: string) {
   updateCubesVisibility();
 }
 
-// Función para verificar y habilitar cubos según las esferas seleccionadas y las acciones completadas
+// Función para verificar y habilitar cubos según las esferas seleccionadas y las  acciones completadas
 function updateCubesVisibility() {
   console.log(`Verificando visibilidad de los cubos. Esferas recogidas: ${selectedSpheres}`);
   if (!action1Completed) {

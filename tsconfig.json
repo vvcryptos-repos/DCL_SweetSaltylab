@@ -5,7 +5,8 @@
     "jsx": "react",
     "jsxFactory": "ReactEcs.createElement",
     "jsxFragmentFactory": "ReactEcs.Fragment",
-    "lib": ["es2016", "dom"]
+    "lib": ["es2016", "dom"],
+    "skipLibCheck": true,
   },
   "include": [
     "src/**/*.ts",
@@ -13,3 +14,4 @@
   ],
   "extends": "@dcl/sdk/types/tsconfig.ecs7.json"
 }
+

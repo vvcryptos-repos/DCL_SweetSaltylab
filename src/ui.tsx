@@ -4,10 +4,10 @@ import { openExternalUrl } from "~system/RestrictedActions";
 
 export function showPrompt1() {
   const prompt = ui.createComponent(ui.OkPrompt, {
-    text: 'This is the prompt for the first green plane',
+    text: 'You found the first sweet and salty combination! Chocolate with SALT, a strange but delicious mix!',
     onAccept: () => {
       console.log('More info pressed for prompt 1');
-      openExternalUrl({ url: 'https://www.behance.com' });
+      openExternalUrl({ url: 'https://www.garnishandglaze.com/salted-chocolate-covered-caramels-recipe/' });
     },
     acceptLabel: 'More Info',
     useDarkTheme: true,
@@ -21,10 +21,10 @@ export function showPrompt1() {
 
 export function showPrompt2() {
   const prompt = ui.createComponent(ui.OkPrompt, {
-    text: 'This is the prompt for the second green plane',
+    text: 'For the adventurous, try fries with ice cream! Next time you order ice cream, ask for some fries too!',
     onAccept: () => {
       console.log('More info pressed for prompt 2');
-      openExternalUrl({ url: 'https://www.behance.com' });
+      openExternalUrl({ url: 'https://www.gmanetwork.com/news/lifestyle/food/912622/soft-serve-ice-cream-in-a-basket-of-fries-this-local-french-fries-brand-made-it-happen/story/' });
     },
     acceptLabel: 'More Info',
     useDarkTheme: true,
@@ -38,10 +38,10 @@ export function showPrompt2() {
 
 export function showPrompt3() {
   const prompt = ui.createComponent(ui.OkPrompt, {
-    text: 'This is the prompt for the third green plane',
+    text: 'Savor the unique blend of sweet jam and salty cheese',
     onAccept: () => {
       console.log('More info pressed for prompt 3');
-      openExternalUrl({ url: 'https://www.behance.com' });
+      openExternalUrl({ url: 'https://yummybazaar.com/blogs/blog/pairing-cheese-and-jam' });
     },
     acceptLabel: 'More Info',
     useDarkTheme: true,

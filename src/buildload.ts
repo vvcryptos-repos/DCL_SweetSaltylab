@@ -58,16 +58,16 @@ const purpleSphere = createModel("models/cheese.glb", Vector3.create(61.63, 5, 2
 // Lista de todas las esferas para fácil manejo
 const spheres = [yellowSphere, blueSphere, redSphere, greenSphere, pinkSphere, purpleSphere];
 
-// Crear cubos con colores y posiciones específicas
-const blackCube = createCube(Color4.create(0, 0, 0, 1), Vector3.create(33, 1.2, 29)); // Cubo negro (x)
-const grayCube = createCube(Color4.create(0.5, 0.5, 0.5, 1), Vector3.create(32, 1.2, 29)); // Cubo gris (y)
-const darkBlueCube = createCube(Color4.create(0, 0, 0.5, 1), Vector3.create(29.3, 1.4, 29.3)); // Cubo azul oscuro (z)
+const blackCube = createCube(Color4.create(1, 0.84, 0, 1), Vector3.create(33, 1.2, 29)); // Cambiar color a dorado
+const grayCube = createCube(Color4.create(1, 0.84, 0, 1), Vector3.create(32, 1.2, 29)); // Cambiar color a dorado
+const darkBlueCube = createCube(Color4.create(1, 0.84, 0, 1), Vector3.create(29.3, 1.4, 29.3)); // Cambiar color a dorado
 
-// Función para crear un modelo GLB verde claro
-function createLightGreenModel(position: Vector3, promptFunction: () => void): Entity {
+
+// Función para crear un modelo GLB específico al cubo
+function createSpecificModel(modelPath: string, position: Vector3, promptFunction: () => void): Entity {
   const model = engine.addEntity();
   Transform.create(model, { position: Vector3.create(position.x, position.y + 0.1, position.z), scale: Vector3.create(2, 2, 2) });
-  GltfContainer.create(model, { src: "models/choco.glb" }); // Ruta al modelo GLB verde claro
+  GltfContainer.create(model, { src: modelPath }); // Ruta al modelo GLB específico
   MeshCollider.setBox(model); // Asumimos que el modelo GLB tiene un colisionador de caja
   VisibilityComponent.create(model, { visible: true });
 
@@ -76,6 +76,7 @@ function createLightGreenModel(position: Vector3, promptFunction: () => void): E
 
   return model;
 }
+
 
 // Función para manejar la selección de esferas (modelos GLB)
 function onModelClicked(model: Entity, modelName: string) {
@@ -95,12 +96,12 @@ function onModelClicked(model: Entity, modelName: string) {
   updateCubesVisibility();
 }
 
-// Función para verificar y habilitar cubos según las esferas seleccionadas y las  acciones completadas
+// Función para verificar y habilitar cubos según las esferas seleccionadas y las acciones completadas
 function updateCubesVisibility() {
   console.log(`Verificando visibilidad de los cubos. Esferas recogidas: ${selectedSpheres}`);
   if (!action1Completed) {
     if (selectedSpheres.includes('a') && selectedSpheres.includes('b')) {
-      enableCube(blackCube, showPrompt1);
+      enableCube(blackCube, showPrompt1, "models/choco.glb");
     } else {
       disableCubeInteraction(blackCube);
     }
@@ -108,7 +109,7 @@ function updateCubesVisibility() {
 
   if (action1Completed && !action2Completed) {
     if (selectedSpheres.includes('c') && selectedSpheres.includes('d')) {
-      enableCube(grayCube, showPrompt2);
+      enableCube(grayCube, showPrompt2, "models/fries.glb");
     } else {
       disableCubeInteraction(grayCube);
     }
@@ -116,18 +117,19 @@ function updateCubesVisibility() {
 
   if (action2Completed && !action3Completed) {
     if (selectedSpheres.includes('e') && selectedSpheres.includes('f')) {
-      enableCube(darkBlueCube, showPrompt3);
+      enableCube(darkBlueCube, showPrompt3, "models/jam.glb");
     } else {
       disableCubeInteraction(darkBlueCube);
     }
   }
 }
 
+
 // Función para habilitar un cubo
-function enableCube(cube: Entity, promptFunction: () => void) {
+function enableCube(cube: Entity, promptFunction: () => void, modelPath: string) {
   addInteraction(cube, () => {
     if (cube === blackCube && selectedSpheres.includes('a') && selectedSpheres.includes('b')) {
-      createLightGreenModel(Vector3.create(33, 1.3, 29), promptFunction); // Crear modelo GLB encima del cubo negro
+      createSpecificModel(modelPath, Vector3.create(33, 1.3, 29), promptFunction); // Crear modelo GLB encima del cubo negro
       action1Completed = true;
       console.log("Acción 1 completada");
       selectedSpheres = [];
@@ -135,7 +137,7 @@ function enableCube(cube: Entity, promptFunction: () => void) {
       enableSpheresForAction(2);
       updateCubesVisibility();
     } else if (cube === grayCube && selectedSpheres.includes('c') && selectedSpheres.includes('d') && action1Completed) {
-      createLightGreenModel(Vector3.create(32, 1.3, 29), promptFunction); // Crear modelo GLB encima del cubo gris
+      createSpecificModel(modelPath, Vector3.create(32, 1.3, 29), promptFunction); // Crear modelo GLB encima del cubo gris
       action2Completed = true;
       console.log("Acción 2 completada");
       selectedSpheres = [];
@@ -143,7 +145,7 @@ function enableCube(cube: Entity, promptFunction: () => void) {
       enableSpheresForAction(3);
       updateCubesVisibility();
     } else if (cube === darkBlueCube && selectedSpheres.includes('e') && selectedSpheres.includes('f') && action2Completed) {
-      createLightGreenModel(Vector3.create(29.3, 1.5, 29.3), promptFunction); // Crear modelo GLB encima del cubo azul oscuro
+      createSpecificModel(modelPath, Vector3.create(29.3, 1.5, 29.3), promptFunction); // Crear modelo GLB encima del cubo azul oscuro
       action3Completed = true;
       console.log("Acción 3 completada");
       selectedSpheres = [];
@@ -154,6 +156,7 @@ function enableCube(cube: Entity, promptFunction: () => void) {
     }
   });
 }
+
 
 // Función para deshabilitar la interacción de un cubo
 function disableCubeInteraction(cube: Entity) {

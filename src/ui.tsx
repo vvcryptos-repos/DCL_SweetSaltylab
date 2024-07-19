@@ -53,4 +53,22 @@ export function showPrompt3() {
   prompt.show();
 }
 
+export function showInstructions() {
+  const prompt = ui.createComponent(ui.OkPrompt, {
+    text: 'Find the combinations between sweet and salty, and unlock levels of flavor! <b> first clue: think of something from the ocean that surprisingly enhances chocolate</b>',
+    onAccept: () => {
+      console.log('Instructions read');
+    },
+    acceptLabel: 'Start Game',
+    useDarkTheme: true,  // Cambiar esto según tus preferencias de tema
+    width: 450*1.2,
+    height: 300*1.2,
+    startHidden: false,
+  });
+
+  prompt.show();
+}
+
+
+
 ReactEcsRenderer.setUiRenderer(ui.render);

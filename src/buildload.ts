@@ -1,6 +1,6 @@
 import { Entity, GltfContainer, InputAction, MeshCollider, Transform, engine, pointerEventsSystem, AvatarAttach, AvatarAnchorPointType, VisibilityComponent, Material, MeshRenderer } from "@dcl/sdk/ecs";
 import { Vector3, Color4 } from "@dcl/sdk/math";
-import { showPrompt1, showPrompt2, showPrompt3 } from "./ui"; // Asegúrate de importar las funciones correctamente
+import { showPrompt1, showPrompt2, showPrompt3, showInstructions } from "./ui"; // Asegúrate de importar las funciones correctamente
 
 export function buildload() {
   console.log("Scene loaded");
@@ -53,8 +53,8 @@ const yellowSphere = createModel("models/choco.glb", Vector3.create(53.5, 1, 53)
 const blueSphere = createModel("models/salt.glb", Vector3.create(6, 1, 17), Vector3.create(1.75, 1.75, 1.75));   // Esfera azul (b)
 const redSphere = createModel("models/fries.glb", Vector3.create(52.89, 1, 8.8), Vector3.create(1.75, 1.75, 1.75));    // Esfera roja (c)
 const greenSphere = createModel("models/icecream2.glb", Vector3.create(35.38, 1, 55.88), Vector3.create(1.75, 1.75, 1.75));  // Esfera verde (d)
-const pinkSphere = createModel("models/jam.glb", Vector3.create(4.6,0.2 , 52.06), Vector3.create(1.75, 1.75, 1.75)); // Esfera rosa (e)
-const purpleSphere = createModel("models/cheese.glb", Vector3.create(61.63, 5, 28.87), Vector3.create(1.75, 1.75, 1.75)); // Esfera violeta (f)
+const pinkSphere = createModel("models/jam.glb", Vector3.create(13.88,4.27 , 50.17), Vector3.create(1.75, 1.75, 1.75)); // Esfera rosa (e)
+const purpleSphere = createModel("models/cheese.glb", Vector3.create(31, 4, 34), Vector3.create(1.75, 1.75, 1.75)); // Esfera violeta (f)
 // Lista de todas las esferas para fácil manejo
 const spheres = [yellowSphere, blueSphere, redSphere, greenSphere, pinkSphere, purpleSphere];
 
@@ -205,4 +205,19 @@ enableSpheresForAction(1);  // Habilitar interacción de las esferas para la acc
 disableCubeInteraction(grayCube);  // Deshabilitar interacción del cubo gris al inicio
 disableCubeInteraction(darkBlueCube);  // Deshabilitar interacción del cubo azul oscuro al inicio
 
-buildload();
+
+// book de instrucciones
+
+// Añadir el modelo book.glb y su interacción
+const book = createModel("models/book.glb", Vector3.create(28, 0, 38), Vector3.create(1, 1, 1));
+addInteraction(book, showInstructions);
+
+// Función para hacer rotar el libro
+function rotateBook(dt: number) {
+  const transform = Transform.getMutable(book);
+  transform.rotation.y += dt * 1.0; // Ajustar el multiplicador para rotar más rápido (1.0 es un ejemplo)
+}
+// Añadir la función de rotación al sistema de actualización del motor
+engine.addSystem(rotateBook);
+
+buildload();  
